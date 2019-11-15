@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import superagent from 'superagent';
 import { Link } from 'react-router-dom';
+import { url } from './constants';
 
 export default class Rooms extends Component {
   state = {
@@ -9,7 +10,7 @@ export default class Rooms extends Component {
   };
 
   // connect to the string
-  stream = new EventSource('http://localhost:4000/stream');
+  stream = new EventSource(`${url}/stream`);
 
   componentDidMount = () => {
     //
@@ -45,9 +46,9 @@ export default class Rooms extends Component {
   onSubmit = event => {
     event.preventDefault();
     const { value } = this.state;
-    const url = 'http://localhost:4000/room';
+    const url2 = `${url}/room`;
     superagent
-      .post(url)
+      .post(url2)
       .send({ name: value })
       .then(res => console.log('res', res));
     this.reset();

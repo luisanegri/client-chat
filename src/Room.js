@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import superagent from 'superagent';
+import { url } from './constants';
 
 export default class Room extends Component {
   state = {
@@ -13,8 +14,8 @@ export default class Room extends Component {
 
   componentDidMount = () => {
     const { name } = this.props.match.params;
-    const url = `http://localhost:4000/streams/${name}`;
-    this.stream = new EventSource(url);
+    const url3 = `${url}/streams/${name}`;
+    this.stream = new EventSource(url3);
 
     this.stream.onmessage = event => {
       //destructure the data (what was passed to stream.send)
@@ -50,9 +51,9 @@ export default class Room extends Component {
     event.preventDefault();
     const { value } = this.state;
     const { name } = this.props.match.params;
-    const url = `http://localhost:4000/message/${name}`;
+    const url4 = `${url}/message/${name}`;
     superagent
-      .post(url)
+      .post(url4)
       .send({ message: value })
       .then(res => console.log('res', res));
     this.reset();
